@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background: linear-gradient(#227ed452, #cccccc), url('../images/piano.jpg') center fixed no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+section {
+  background-color: #bccbbc;
+}
