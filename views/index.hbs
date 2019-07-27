@@ -1,30 +1,136 @@
 <header>
-    <div class="container">
-        {{!-- <div class="row"> --}}
-            <div class="form-group row">
-                <label for="first_name">First Name</label>
-                <input type="text" class="form-control" id="first_name" placeholder="Jack" required />
-            </div>
-            <div class="form-group row">
-                <label for="last_name">Last Name</label>
-                <input type="text" class="form-control" id="last_name" placeholder="Robinson" required />
-            </div>
-            <div class="form-group row">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="your@email.com">
-            </div>
-            <div class="form-group row">
-                <label for="phone">Phone</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">+234</div>
-                    </div>
-                    <input type="tel" class="form-control" id="phone" placeholder="812 222 2222" required />
-                </div>
-            </div>
-        {{!-- </div> --}}
+    <div class="header-content">
+        <div id="0" class="index-content">
+            <h1 class="atomic-font">Welcome to the piano masterclass</h1>
+            <p>
+                “It's like a whole orchestra, the piano for me.” -Dave Brubeck
+            </p>
+        </div>
     </div>
 </header>
 <section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h3> Register Here </h3>
+        </div>
 
+
+        <form action="POST" class="form">
+            <div id="error" class="row justify-content-center p-3">
+                <div class="form-group col-md-8 bg-danger error p-2">
+                    Error
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="form-group col-md-8">
+                    <label for="first_name">First Name</label>
+                    <input type="text" class="form-control" id="first_name" placeholder="Jack" required />
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="form-group col-md-8">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" placeholder="Robinson" required />
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="form-group col-md-8">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="your@email.com" required />
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="form-group col-md-8">
+                    <label for="phone">Phone</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">+234</div>
+                        </div>
+                        <input type="tel" class="form-control" id="phone" placeholder="812 222 2222" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3 justify-content-center">
+                <div class="form-group col-md-2 mb-md-0">
+                    <input type="submit" id="pay" class="btn btn-primary btn-block" value="Make Payment">
+                </div>
+            </div>
+        </form>
+
+        <div class="paystack"></div>
+    </div>
 </section>
+
+
+<script>
+    $(document).ready(function () {
+
+
+        $('#pay').click(function (e) {
+            e.preventDefault();
+            var firstName = $('#first_name').val();
+            var lastName = $('#last_name').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+            var isPhoneNumeric = Number.isNaN(parseInt(phone));
+
+
+            if (!firstName || !lastName || !email || !phone || phone.length < 10 || !isPhoneNumeric) {
+                console.log('ode bi');
+                $('.error').text('First name, last name, email and a valid phone number are required');
+                $('#error').css('display', 'flex');
+                setTimeout(function () {
+                    $('#error').css('display', 'none');
+                }, 4000);
+            }
+
+            PaystackPop.setup({
+                key: 'pk_test_221221122121',
+                email: email,
+                amount: 2000,
+                container: 'paystack',
+                callback: function (response) {
+                    alert('Your payment is successful, ' + firstName + '. Transaction ref is ' + response.reference);
+                    register(firstName, lastName, email, phone, reference)
+              },
+            });
+
+            window.location.reload();
+        });
+
+        function register(firstName, lastName, email, phone, reference) {
+            $.ajax({
+                method: 'POST',
+                url: '/',
+                data: {
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    phone: phone,
+                    reference: reference
+                },
+                success(data) {
+                    if (data.status) {
+                        alert('Registration Successful')
+                    } else {
+                        alert('Registration failed. Kindly contact +234 701 900 6419.')
+                    }
+                    return;
+                },
+                error() {
+                    alert('An error occurred during registration. Kindly contact +234 701 900 6419.')
+                }
+            });
+        }
+
+
+
+
+        
+    });
+</script>

@@ -4,12 +4,65 @@
   box-sizing: border-box;
 }
 
+body {
+  color: #575657;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.atomic-font {
+  font-family: 'Atomic Age', cursive !important;
+}
+/* background: linear-gradient(#227ed452, #cccccc), url('../images/piano.jpg') center fixed no-repeat; */
+
+
 header {
-  background: linear-gradient(#227ed452, #cccccc), url('../images/piano.jpg') center fixed no-repeat;
+  background: linear-gradient(#e2eaf152, #0a0a0a), url('../images/piano.jpg') center fixed no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 40vh;
+}
+
+/* Check for mobile */
+.header-content {
+  color: #fff517;
+  position: absolute;
+  width: 60%;
+  top: 25%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.header-content p {
+  color: #dddddd;
+  font-weight: 400;
 }
 
 section {
-  background-color: #bccbbc;
+  background-color: #F4F4F4;
+  color: #454545;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+h3:after {
+  display: block;
+  height: 2px;
+  background-color: #fff517;
+  content: '';
+  width: 100px;
+  margin: 1rem auto 1.5rem auto;
+}
+
+.form {
+  overflow: hidden;
+}
+
+.error {
+  border-radius: 3px;
+  color: white;
+  font-weight: 500;
+}
+
+#error {
+  display: none;
 }
