@@ -62,7 +62,7 @@
             </div>
         </form>
 
-        <div class="paystack"></div>
+        <div id="paystack"></div>
     </div>
 </section>
 
@@ -77,20 +77,20 @@
             var lastName = $('#last_name').val();
             var email = $('#email').val();
             var phone = $('#phone').val();
-            var isPhoneNumeric = Number.isNaN(parseInt(phone));
+            var isPhoneNumeric = !Number.isNaN(parseInt(phone));
 
 
             if (!firstName || !lastName || !email || !phone || phone.length < 10 || !isPhoneNumeric) {
-                console.log('ode bi');
                 $('.error').text('First name, last name, email and a valid phone number are required');
                 $('#error').css('display', 'flex');
                 setTimeout(function () {
                     $('#error').css('display', 'none');
                 }, 4000);
+                return;
             }
 
             PaystackPop.setup({
-                key: 'pk_test_221221122121',
+                key: 'pk_live_1301a0e31b1b4bed665e6ba0c27ab156972369c2',
                 email: email,
                 amount: 2000,
                 container: 'paystack',
