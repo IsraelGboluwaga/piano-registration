@@ -2,9 +2,9 @@
     <div class="header-content">
         <div id="0" class="index-content">
             <h2 class="atomic-font">Welcome to the piano masterclass</h1>
-            <p>
-                “It's like a whole orchestra, the piano for me.” -Dave Brubeck
-            </p>
+                <p>
+                    “It's like a whole orchestra, the piano for me.” -Dave Brubeck
+                </p>
         </div>
     </div>
 </header>
@@ -13,7 +13,6 @@
         <div class="row justify-content-center">
             <h3> Register Here </h3>
         </div>
-
 
         <form action="POST" class="form">
             <div id="error" class="row justify-content-center p-3">
@@ -60,10 +59,9 @@
                     <input type="submit" id="pay" class="btn btn-primary btn-block" value="Make Payment">
                 </div>
             </div>
-
-            <div id="paystack"></div>
-
         </form>
+
+        <div id="paystack" class="row justify-content-center p-3"></div>
 
     </div>
 </section>
@@ -94,34 +92,36 @@
             PaystackPop.setup({
                 key: 'pk_test_057ee2fbfd7c13906f37667addb7d28e2e81f8f9',
                 email: email,
-                amount: 2000,
+                amount: 500000,
                 container: 'paystack',
                 callback: function (response) {
                     alert('Your payment is successful, ' + firstName + '. Transaction ref is ' + response.reference);
                     register(firstName, lastName, email, phone, reference);
-              },
+                },
             });
 
         });
 
         function register(firstName, lastName, email, phone, reference) {
+            console.log('O tie debi');
+            var submitData = {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                phone: phone,
+                reference: reference
+            };
+            
             $.ajax({
                 method: 'POST',
                 url: '/',
-                data: {
-                    first_name: firstName,
-                    last_name: lastName,
-                    email: email,
-                    phone: phone,
-                    reference: reference
-                },
+                data: submitData,
                 success(data) {
                     if (data.status) {
                         alert('Registration Successful')
                     } else {
                         alert('Registration failed. Kindly contact +234 701 900 6419.')
                     }
-                    window.location.reload();
                     return;
                 },
                 error() {
@@ -130,9 +130,5 @@
             });
         }
 
-
-
-
-        
     });
 </script>
