@@ -10,11 +10,14 @@ const indexRouter = require('./route');
 
 const app = express();
 
-if (process.env.NODE_ENV === 'production') {
-  mongoose.connect('<add_remote_url>', { useNewUrlParser: true });
-} else {
-  mongoose.connect('mongodb://localhost:27017/gideon', { useNewUrlParser: true });
-}
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
+mongoose.connection.on('connected', () => {
+  console.log('Mongo DB connected')
+});
+mongoose.connection.on('error', (err) => {
+  console.log('Mongo connection error => \n', err);
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

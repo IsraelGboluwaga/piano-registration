@@ -60,9 +60,11 @@
                     <input type="submit" id="pay" class="btn btn-primary btn-block" value="Make Payment">
                 </div>
             </div>
+
+            <div id="paystack"></div>
+
         </form>
 
-        <div id="paystack"></div>
     </div>
 </section>
 
@@ -90,13 +92,13 @@
             }
 
             PaystackPop.setup({
-                key: 'pk_live_1301a0e31b1b4bed665e6ba0c27ab156972369c2',
+                key: 'pk_test_057ee2fbfd7c13906f37667addb7d28e2e81f8f9',
                 email: email,
                 amount: 2000,
                 container: 'paystack',
                 callback: function (response) {
                     alert('Your payment is successful, ' + firstName + '. Transaction ref is ' + response.reference);
-                    register(firstName, lastName, email, phone, reference)
+                    register(firstName, lastName, email, phone, reference);
               },
             });
 
