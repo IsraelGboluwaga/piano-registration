@@ -102,7 +102,6 @@
               },
             });
 
-            window.location.reload();
         });
 
         function register(firstName, lastName, email, phone, reference) {
@@ -122,6 +121,7 @@
                     } else {
                         alert('Registration failed. Kindly contact +234 701 900 6419.')
                     }
+                    window.location.reload();
                     return;
                 },
                 error() {
