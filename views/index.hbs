@@ -14,7 +14,7 @@
             <h3> Register Here </h3>
         </div>
 
-        <form action="POST" class="form">
+        <form action="/" method="POST" class="form">
             <div id="error" class="row justify-content-center p-3">
                 <div class="form-group col-md-8 bg-danger error p-2">
                     Error
@@ -24,21 +24,21 @@
             <div class="row justify-content-center">
                 <div class="form-group col-md-8">
                     <label for="first_name">First Name</label>
-                    <input type="text" class="form-control" id="first_name" placeholder="Jack" required />
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Jack" required />
                 </div>
             </div>
 
             <div class="row justify-content-center">
                 <div class="form-group col-md-8">
                     <label for="last_name">Last Name</label>
-                    <input type="text" class="form-control" id="last_name" placeholder="Robinson" required />
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Robinson" required />
                 </div>
             </div>
 
             <div class="row justify-content-center">
                 <div class="form-group col-md-8">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="your@email.com" required />
+                    <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required />
                 </div>
             </div>
 
@@ -49,15 +49,15 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">+234</div>
                         </div>
-                        <input type="tel" class="form-control" id="phone" placeholder="812 222 2222" required />
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="812 222 2222" required />
                     </div>
                 </div>
             </div>
 
             <div class="row mb-3 justify-content-center">
                 <div class="form-group col-md-2 mb-md-0">
-                    <button type="submit" id="pay" class="btn btn-primary btn-block"
-                        data-toggle="modal" data-target="#modal-wrap">Make Payment</button>
+                    <input type="submit" id="pay" class="btn btn-primary btn-block"
+                        data-toggle="modal" data-target="#modal-wrap" value="Make Payment">
                 </div>
             </div>
         </form>
@@ -98,7 +98,11 @@
                 amount: 500000,
                 container: 'paystack',
                 callback: function (response) {
-                    register(firstName, lastName, email, phone, reference);
+                    console.log('Respo =>', response);
+                    register(firstName, lastName, email, phone, response.reference);
+                    alert('Registration successful');
+                    window.location.reload();
+
                 },
             });
 
@@ -124,7 +128,7 @@
                     } else {
                         alert('Registration failed. Kindly contact +234 701 900 6419.')
                     }
-                    window.location.reload();
+                    //window.location.reload();
                     return;
                 },
                 error() {
