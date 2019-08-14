@@ -14,7 +14,7 @@
             <h3> Register Here </h3>
         </div>
 
-        <form action="/" method="POST" class="form">
+        <form action="https://formspree.io/arunahisraelg2010@gmail.com" method="POST" id="reg-form" class="form">
             <div id="error" class="row justify-content-center p-3">
                 <div class="form-group col-md-8 bg-danger error p-2">
                     Error
@@ -78,7 +78,6 @@
 <script>
     $(document).ready(function () {
 
-
         $('#pay').click(function (e) {
             e.preventDefault();
             var firstName = $('#first_name').val();
@@ -98,9 +97,9 @@
             }
 
             PaystackPop.setup({
-                key: 'pk_test_057ee2fbfd7c13906f37667addb7d28e2e81f8f9',
+                key: 'pk_live_1301a0e31b1b4bed665e6ba0c27ab156972369c2',
                 email: email,
-                amount: 500000,
+                amount: 500,
                 container: 'paystack',
                 callback: function (response) {
                     console.log('Respo =>', response);
@@ -109,10 +108,9 @@
                         alert('Payment Unsuccessful. Kindly try again.');
                         window.location.reload();
                     }
-                    register(firstName, lastName, email, phone, ref);
                     alert('Registration successful');
+                    $("#reg-form").submit();
                     window.location.reload();
-
                 },
             });
 
@@ -120,41 +118,8 @@
 
         function verifyPayment(ref) {
             $.get('https://api.paystack.co/transaction/verify/' + ref, function (data, status) {
-                if (data && data.success) {
-                    return true;
-                }
-                return false;
+                return data && data.success;
             })
         }
-
-        function register(firstName, lastName, email, phone, reference) {
-            console.log('O tie debi');
-            var submitData = {
-                first_name: firstName,
-                last_name: lastName,
-                email: email,
-                phone: phone,
-                reference: reference
-            };
-
-            $.ajax({
-                method: 'POST',
-                url: '/',
-                data: submitData,
-                success(data) {
-                    if (data.status) {
-                        alert('Registration Successful')
-                    } else {
-                        alert('Registration failed. Kindly contact +234 701 900 6419.')
-                    }
-                    //window.location.reload();
-                    return;
-                },
-                error() {
-                    alert('An error occurred during registration. Kindly contact +234 701 900 6419.')
-                }
-            });
-        }
-
     });
 </script>

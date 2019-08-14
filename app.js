@@ -3,20 +3,20 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 require('dotenv').config();
 
 const indexRouter = require('./route');
 
 const app = express();
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
-mongoose.connection.on('connected', () => {
-  console.log('Mongo DB connected')
-});
-mongoose.connection.on('error', (err) => {
-  console.log('Mongo connection error => \n', err);
-});
+// mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
+// mongoose.connection.on('connected', () => {
+//   console.log('Mongo DB connected')
+// });
+// mongoose.connection.on('error', (err) => {
+//   console.log('Mongo connection error => \n', err);
+// });
 
 
 // view engine setup
