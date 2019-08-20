@@ -14,9 +14,15 @@
             <h3> Register Here </h3>
         </div>
 
-        <form action="https://formspree.io/arunahisraelg2010@gmail.com" method="POST" id="reg-form" class="form">
+        <form action="https://formspree.io/pianohub2019@gmail.com" method="POST" id="reg-form" class="form">
             <div id="error" class="row justify-content-center p-3">
                 <div class="form-group col-md-8 bg-danger error p-2">
+                    Error
+                </div>
+            </div>
+
+            <div id="success" class="row justify-content-center p-3">
+                <div class="form-group col-md-8 bg-success success p-2">
                     Error
                 </div>
             </div>
@@ -53,7 +59,7 @@
                             <div class="input-group-text">+234</div>
                         </div>
                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="812 222 2222"
-                            required />
+                            maxlength="11" minlength="10" required />
                     </div>
                 </div>
             </div>
@@ -61,24 +67,17 @@
             <div class="row mb-3 justify-content-center">
                 <div class="form-group col-md-2 mb-md-0">
                     <input type="submit" id="pay" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-wrap"
-                        value="Make Payment">
+                        value="Register">
                 </div>
             </div>
         </form>
-
-        <div id="modal-wrap" class="modal fade p-3" tabindex="-1" role="dialog" aria-labelledby="modal-wrap-head"
-            aria-hidden="true">
-            <div id="paystack" class="row justify-content-center p-3"></div>
-        </div>
-
     </div>
 </section>
-
 
 <script>
     $(document).ready(function () {
 
-        $('#pay').click(function (e) {
+        $('#reg-form').on('submit', function (e) {
             e.preventDefault();
             var firstName = $('#first_name').val();
             var lastName = $('#last_name').val();
@@ -96,30 +95,8 @@
                 return;
             }
 
-            PaystackPop.setup({
-                key: 'pk_test_057ee2fbfd7c13906f37667addb7d28e2e81f8f9',
-                email: email,
-                amount: 500000,
-                container: 'paystack',
-                callback: function (response) {
-                    console.log('Respo =>', response);
-                    var ref = response.reference;
-                    if (!verifyPayment(ref)) {
-                        alert('Payment Unsuccessful. Kindly try again.');
-                        window.location.reload();
-                    }
-                    alert('Registration successful');
-                    $("#reg-form").submit();
-                    window.location.reload();
-                },
-            });
+            this.submit();
 
         });
-
-        function verifyPayment(ref) {
-            $.get('https://api.paystack.co/transaction/verify/' + ref, function (data, status) {
-                return data && data.success;
-            })
-        }
     });
 </script>
